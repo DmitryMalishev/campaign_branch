@@ -99,7 +99,7 @@ static void parallelMax(int tid, T* s_A, U* s_B, sycl::nd_item<3> item_ct1);
  /* DPCT_ORIG __global__ void checkCentroid_CUDA(int N, int D, int iter, int
   * centroid, FLOAT_TYPE *X, FLOAT_TYPE *CTR, FLOAT_TYPE *DIST, int *ASSIGN,
   * FLOAT_TYPE *MAXDIST, int *MAXID);*/
-void checkCentroid_CUDA(int N, int D, int iter, int centroid, FLOAT_TYPE* X,
+void checkCentroid_sycl(int N, int D, int iter, int centroid, FLOAT_TYPE* X,
     FLOAT_TYPE* CTR, FLOAT_TYPE* DIST, int* ASSIGN,
     FLOAT_TYPE* MAXDIST, int* MAXID,
     sycl::nd_item<3> item_ct1, uint8_t* dpct_local);

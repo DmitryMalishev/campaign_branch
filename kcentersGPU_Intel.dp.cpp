@@ -201,7 +201,7 @@ static T distanceGPU(int D, T *elementA, T *elementB)
 /* DPCT_ORIG __global__ void checkCentroid_CUDA(int N, int D, int iter, int
  * centroid, FLOAT_TYPE *X, FLOAT_TYPE *CTR, FLOAT_TYPE *DIST, int *ASSIGN,
  * FLOAT_TYPE *MAXDIST, int *MAXID)*/
-void checkCentroid_CUDA(int N, int D, int iter, int centroid, FLOAT_TYPE *X,
+void checkCentroid_sycl(int N, int D, int iter, int centroid, FLOAT_TYPE *X,
                         FLOAT_TYPE *CTR, FLOAT_TYPE *DIST, int *ASSIGN,
                         FLOAT_TYPE *MAXDIST, int *MAXID,
                         sycl::nd_item<3> item_ct1, uint8_t *dpct_local)
@@ -332,7 +332,7 @@ void kcentersGPU(int N, int K, int D, FLOAT_TYPE *x, int *assign, FLOAT_TYPE *di
                                    dpct_global_range.get(0)),
                     sycl::range<3>(block.get(2), block.get(1), block.get(0))),
                 [=](sycl::nd_item<3> item_ct1) {
-                    checkCentroid_CUDA(N, D, k, centroid, x_d, ctr_d, dist_d,
+                    checkCentroid_sycl(N, D, k, centroid, x_d, ctr_d, dist_d,
                                        assign_d, maxDistBlock_d, maxIdBlock_d,
                                        item_ct1,
                                        dpct_local_acc_ct1.get_pointer());
